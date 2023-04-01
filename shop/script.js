@@ -10,8 +10,8 @@
 // };
 const menSection = document.querySelector('.men');
 const womenSection = document.querySelector('.women');
-const jewelerySection = document.querySelector("jewelery");
-const electronicsSection = document.querySelector("electronics");
+const jewelerySection = document.querySelector(".jewelery");
+const electronicsSection = document.querySelector(".electronics");
 
 
 
@@ -54,10 +54,14 @@ fetch('https://fakestoreapi.com/products')
       let ladyElement = renderUI(item.image, item.title, item.price, item.rating);
       womenSection.innerHTML += ladyElement;
     }
-    // else if(item.category == "jewelery"){
-    //   let jeweleryElement = renderUI(item.image, item.title, item.price, item.rating);
-    //   jewelerySection.innerHTML += jeweleryElement;
-    // }
+    else if(item.category == "jewelery"){
+      let jeweleryElement = renderUI(item.image, item.title, item.price, item.rating);
+      jewelerySection.innerHTML += jeweleryElement;
+    }
+    else if(item.category == "electronics"){
+      let electronicElement = renderUI(item.image, item.title, item.price, item.rating);
+      electronicsSection.innerHTML += electronicElement;
+    }
     })
 
 
