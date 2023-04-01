@@ -9,7 +9,7 @@
 //   rating: { rate: 3.9, count: 120 },
 // };
 const menSection = document.querySelector('.men');
-const womenSection = document.querySelector('women');
+const womenSection = document.querySelector('.women');
 const jewelerySection = document.querySelector("jewelery");
 const electronicsSection = document.querySelector("electronics");
 
@@ -21,7 +21,6 @@ function renderUI(image, name, price, rating){
   <div class="info">
     <div class="row">
       <div class="price">$${price}</div>
-      <div class="sized">S,M,L</div>
       <div class="name">${name}</div>
     </div>
     <div class="colors">
@@ -47,10 +46,18 @@ fetch('https://fakestoreapi.com/products')
     let stringifiedData = JSON.stringify(data);
     localStorage.setItem('products', stringifiedData);
     data.forEach((item) => {
-    if(item.category = "men's clothing"){
-      let mensElement = renderUI(item.image, item.name, item.price, item.rating);
+    if(item.category == "men's clothing"){
+      let mensElement = renderUI(item.image, item.title, item.price, item.rating);
       menSection.innerHTML += mensElement;
     }
+    else if(item.category == "women's clothing"){
+      let ladyElement = renderUI(item.image, item.title, item.price, item.rating);
+      womenSection.innerHTML += ladyElement;
+    }
+    // else if(item.category == "jewelery"){
+    //   let jeweleryElement = renderUI(item.image, item.title, item.price, item.rating);
+    //   jewelerySection.innerHTML += jeweleryElement;
+    // }
     })
 
 
