@@ -13,8 +13,6 @@ const womenSection = document.querySelector('.women');
 const jewelerySection = document.querySelector(".jewelery");
 const electronicsSection = document.querySelector(".electronics");
 
-
-
 function renderUI(image, name, price, rating){
   return `<div class="item">
   <img src="${image}" alt="Item" />
@@ -38,7 +36,6 @@ function renderUI(image, name, price, rating){
 }
 
 
-
 fetch('https://fakestoreapi.com/products')
   .then(response => response.json())
   .then(data => {
@@ -47,19 +44,19 @@ fetch('https://fakestoreapi.com/products')
     localStorage.setItem('products', stringifiedData);
     data.forEach((item) => {
     if(item.category == "men's clothing"){
-      let mensElement = renderUI(item.image, item.title, item.price, item.rating);
+      let mensElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       menSection.innerHTML += mensElement;
     }
     else if(item.category == "women's clothing"){
-      let ladyElement = renderUI(item.image, item.title, item.price, item.rating);
+      let ladyElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       womenSection.innerHTML += ladyElement;
     }
     else if(item.category == "jewelery"){
-      let jeweleryElement = renderUI(item.image, item.title, item.price, item.rating);
+      let jeweleryElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       jewelerySection.innerHTML += jeweleryElement;
     }
     else if(item.category == "electronics"){
-      let electronicElement = renderUI(item.image, item.title, item.price, item.rating);
+      let electronicElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       electronicsSection.innerHTML += electronicElement;
     }
     })
