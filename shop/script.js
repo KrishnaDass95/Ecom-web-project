@@ -20,9 +20,8 @@ function renderUI(image, name, price, rating){
     <div class="row">
       <div class="price">$${price}</div>
       <div class="name">${name}</div>
+      <div class="row rating">Rating: ${rating}</div>
     </div>
-
-    <div class="row">Rating:${rating}</div>
   </div>
   <button id="addBtn">Add to Cart</button>
 </div>`
