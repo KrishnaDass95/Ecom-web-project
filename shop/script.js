@@ -21,14 +21,7 @@ function renderUI(image, name, price, rating){
       <div class="price">$${price}</div>
       <div class="name">${name}</div>
     </div>
-    <div class="colors">
-      Colors:
-      <div class="row">
-        <div class="circle" style="background-color: #000"></div>
-        <div class="circle" style="background-color: #4938af"></div>
-        <div class="circle" style="background-color: #203d3e"></div>
-      </div>
-    </div>
+
     <div class="row">Rating:${rating}</div>
   </div>
   <button id="addBtn">Add to Cart</button>
