@@ -65,14 +65,30 @@ fetch('https://fakestoreapi.com/products')
     console.log('error message', error);
   })
 
-
-
 console.log('shop page');
 const searchBarElement = document.getElementById('search-field');
 
+
 function search(event){
-  const searchTerm = event.target.value;
-  console.log(searchTerm);
+  let allProducts = document.querySelectorAll('.item');
+  const searchTerm = event.target.value.toLowerCase();
+  console.log("search Term -> " , searchTerm);
+
+  console.log(allProducts);
+  allProducts.forEach((product) => {
+    const productName = product.querySelector('.name').textContent.toLowerCase();
+    console.log(productName);
+    if(!productName.includes(searchTerm)){
+      product.style.display = 'none';
+    }
+    else{
+      product.style.display = 'block';
+    }
+  })
+
+
+
+
 }
 
 
