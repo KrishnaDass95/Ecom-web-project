@@ -22,11 +22,26 @@ const womensFilter = document.querySelector(".women-filter");
 const jewFilter = document.querySelector(".jew-filter");
 const electronicsFilter = document.querySelector(".electronics-filter");
 
+
+function clearColors(){
+    allFilter.style.backgroundColor = 'white';
+    mensFilter.style.backgroundColor = 'white';
+    womensFilter.style.backgroundColor = 'white';
+    jewFilter.style.backgroundColor = 'white';
+    electronicsFilter.style.backgroundColor = 'white';
+    allFilter.style.color = 'black';
+    mensFilter.style.color = 'black';
+    womensFilter.style.color = 'black';
+    jewFilter.style.color = 'black';
+    electronicsFilter.style.color = 'black';
+}
+
 function clearHTML(){
     menSection.innerHTML = "";
     womenSection.innerHTML = "";
     jewelerySection.innerHTML = "";
     electronicsSection.innerHTML = "";
+    
 }
 
 function renderUI(image, name, price, rating){
@@ -107,19 +122,34 @@ function search(event){
 searchBarElement.addEventListener("change", search);
 allFilter.addEventListener('click', () => {
   filterData("all");
+  clearColors();
+  allFilter.style.backgroundColor = 'black';
+  allFilter.style.color = 'white';
 });
 mensFilter.addEventListener('click', () => {
   filterData("men");
+  clearColors();
+  mensFilter.style.backgroundColor = 'black';
+  mensFilter.style.color = 'white';
 });
 womensFilter.addEventListener('click', () => {
   filterData("women");
+  clearColors();
+  womensFilter.style.backgroundColor = 'black';
+  womensFilter.style.color = 'white';
 });
 jewFilter.addEventListener('click', () => {
   filterData("jewel");
+  clearColors();
+  jewFilter.style.backgroundColor = 'black';
+  jewFilter.style.color = 'white';
 });
 electronicsFilter.addEventListener('click', () => {
   filterData("electronic");
-})
+  clearColors();
+  electronicsFilter.style.backgroundColor = 'black';
+  electronicsFilter.style.color = 'white';
+});
 
 
 
