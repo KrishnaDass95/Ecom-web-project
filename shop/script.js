@@ -16,6 +16,7 @@ const jewelerySection = document.querySelector(".jewelery");
 const electronicsSection = document.querySelector(".electronics");
 const logoutButton = document.querySelector("#logoutButton");
 
+
 // Filters
 const allFilter = document.querySelector('.active');
 const mensFilter = document.querySelector('.men-filter');
@@ -45,6 +46,27 @@ function clearHTML(){
     
 }
 
+function addToCart(addToCartButtons){
+  addToCartButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      console.log('add to cart clicked');
+      const parentItem = event.target.closest('.item');
+      console.log("parentItem", parentItem);
+      const productDetails = {
+        image: parentItem.querySelector('img'),
+        name: parentItem.querySelector('.name'),
+        price: parentItem.querySelector('.price')
+      }
+  
+      // add the product to cart
+      cart = JSON.parse(localStorage.getItem('cart'));
+      cart.push(productDetails);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      // console.log(cart);
+    })
+  })
+}
+
 function renderUI(image, name, price, rating){
   return `<div class="item">
   <img src="${image}" alt="Item" />
@@ -55,7 +77,7 @@ function renderUI(image, name, price, rating){
       <div class="row rating">Rating: ${rating}</div>
     </div>
   </div>
-  <button id="addBtn">Add to Cart</button>
+  <button id="addBtn" class="add-to-cart">Add to Cart</button>
 </div>`
 }
 
@@ -83,6 +105,8 @@ function fetchData(filter){
       let electronicElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       electronicsSection.innerHTML += electronicElement;
     }
+    let addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCart(addToCartButtons);
     })}).catch((error) => {
     console.log('error message', error);
   })
@@ -112,10 +136,7 @@ function search(event){
 
 }
 
-console.log('shop page');
 fetchData("all");
-
-
 
 // Event Listeners
 
@@ -157,4 +178,14 @@ logoutButton.addEventListener('click', (e) => {
   localStorage.removeItem('currentUser');
   window.location.href = '../';
 })
+
+
+// Let's handle add to cart
+let cart = [];
+if(localStorage.getItem('cart')){
+  cart = JSON.parse(localStorage.getItem('cart'));
+}
+else{
+  cart = localStorage.setItem('cart', JSON.stringify(cart));
+}
 
