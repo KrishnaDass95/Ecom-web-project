@@ -23,7 +23,8 @@ function checkIfUserExists(email){
 }
 
 
-function handleSignUp(){
+function handleSignUp(e){
+    e.preventDefault();
     let fName = firstNameField.value;
     let lName = lastNameField.value;
     let email = emailField.value;
@@ -45,6 +46,7 @@ function handleSignUp(){
             };
             users.push(newUserObj);
             localStorage.setItem("users", JSON.stringify(users));
+            window.location.href = "../login/"
             console.log('users obj ->', localStorage.getItem("users"));
         }
     }
