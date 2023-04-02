@@ -9,12 +9,25 @@
 //   rating: { rate: 3.9, count: 120 },
 // };
 
+const searchBarElement = document.getElementById('search-field');
 const menSection = document.querySelector('.men');
 const womenSection = document.querySelector('.women');
 const jewelerySection = document.querySelector(".jewelery");
 const electronicsSection = document.querySelector(".electronics");
 
-// DO ALL THE FILTERS
+// Filters
+const allFilter = document.querySelector('.active');
+const mensFilter = document.querySelector('.men-filter');
+const womensFilter = document.querySelector(".women-filter");
+const jewFilter = document.querySelector(".jew-filter");
+const electronicsFilter = document.querySelector(".electronics-filter");
+
+function clearHTML(){
+    menSection.innerHTML = "";
+    womenSection.innerHTML = "";
+    jewelerySection.innerHTML = "";
+    electronicsSection.innerHTML = "";
+}
 
 function renderUI(image, name, price, rating){
   return `<div class="item">
@@ -30,46 +43,43 @@ function renderUI(image, name, price, rating){
 </div>`
 }
 
-
-fetch('https://fakestoreapi.com/products')
+function fetchData(filter){
+  fetch('https://fakestoreapi.com/products')
   .then(response => response.json())
   .then(data => {
     console.log(data);
     let stringifiedData = JSON.stringify(data);
     localStorage.setItem('products', stringifiedData);
     data.forEach((item) => {
-    if(item.category == "men's clothing"){
+    if(item.category == "men's clothing" && (filter == "all" || filter == "men")){
       let mensElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       menSection.innerHTML += mensElement;
     }
-    else if(item.category == "women's clothing"){
+    else if(item.category == "women's clothing" && (filter == "all" || filter == "women")){
       let ladyElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       womenSection.innerHTML += ladyElement;
     }
-    else if(item.category == "jewelery"){
+    else if(item.category == "jewelery" && (filter == "all" || filter == "jewel")){
       let jeweleryElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       jewelerySection.innerHTML += jeweleryElement;
     }
-    else if(item.category == "electronics"){
+    else if(item.category == "electronics" && (filter == "all" || filter == "electronic")){
       let electronicElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       electronicsSection.innerHTML += electronicElement;
     }
-    })
-
-
-
-
-
-
-
-
-
-  }).catch((error) => {
+    })}).catch((error) => {
     console.log('error message', error);
   })
+}
+
+function filterData(filter){
+  clearHTML();
+  fetchData(filter);
+}
 
 console.log('shop page');
-const searchBarElement = document.getElementById('search-field');
+fetchData("all");
+
 
 
 function search(event){
@@ -92,5 +102,25 @@ function search(event){
 }
 
 
+// Event Listeners
+
 searchBarElement.addEventListener("change", search);
+allFilter.addEventListener('click', () => {
+  filterData("all");
+});
+mensFilter.addEventListener('click', () => {
+  filterData("men");
+});
+womensFilter.addEventListener('click', () => {
+  filterData("women");
+});
+jewFilter.addEventListener('click', () => {
+  filterData("jewel");
+});
+electronicsFilter.addEventListener('click', () => {
+  filterData("electronic");
+})
+
+
+
 
