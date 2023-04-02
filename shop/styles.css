@@ -16,6 +16,13 @@ a {
   text-decoration: none;
 }
 
+#logoutButton{
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
 }

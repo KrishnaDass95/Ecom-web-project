@@ -14,6 +14,7 @@ const menSection = document.querySelector('.men');
 const womenSection = document.querySelector('.women');
 const jewelerySection = document.querySelector(".jewelery");
 const electronicsSection = document.querySelector(".electronics");
+const logoutButton = document.querySelector("#logoutButton");
 
 // Filters
 const allFilter = document.querySelector('.active');
@@ -151,5 +152,9 @@ electronicsFilter.addEventListener('click', () => {
 });
 
 
-
+logoutButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  localStorage.removeItem('currentUser');
+  window.location.href = '../';
+})
 

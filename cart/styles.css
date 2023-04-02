@@ -111,3 +111,11 @@ nav {
     color: black;
     background-color: white;
   }
+  .container{
+    display: flex;
+    justify-content: space-around;
+  }
+  h1{
+    text-align: center;
+    margin: 20px;
+  }
