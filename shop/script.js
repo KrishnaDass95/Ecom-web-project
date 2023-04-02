@@ -92,11 +92,6 @@ function filterData(filter){
   fetchData(filter);
 }
 
-console.log('shop page');
-fetchData("all");
-
-
-
 function search(event){
   let allProducts = document.querySelectorAll('.item');
   const searchTerm = event.target.value.toLowerCase();
@@ -115,6 +110,10 @@ function search(event){
   })
 
 }
+
+console.log('shop page');
+fetchData("all");
+
 
 
 // Event Listeners
