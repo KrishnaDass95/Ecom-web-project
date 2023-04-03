@@ -24,6 +24,16 @@ const womensFilter = document.querySelector(".women-filter");
 const jewFilter = document.querySelector(".jew-filter");
 const electronicsFilter = document.querySelector(".electronics-filter");
 
+// cart
+let cart = [];
+if(localStorage.getItem('cart')){
+  cart = localStorage.getItem('cart');
+}
+else{
+  cart = localStorage.setItem('cart', JSON.stringify(cart));
+}
+cart = JSON.parse(localStorage.getItem('cart'));
+
 
 function clearColors(){
     allFilter.style.backgroundColor = 'white';
@@ -44,27 +54,6 @@ function clearHTML(){
     jewelerySection.innerHTML = "";
     electronicsSection.innerHTML = "";
     
-}
-
-function addToCart(addToCartButtons){
-  addToCartButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      console.log('add to cart clicked');
-      const parentItem = event.target.closest('.item');
-      console.log("parentItem", parentItem);
-      const productDetails = {
-        image: parentItem.querySelector('img'),
-        name: parentItem.querySelector('.name'),
-        price: parentItem.querySelector('.price')
-      }
-  
-      // add the product to cart
-      cart = JSON.parse(localStorage.getItem('cart'));
-      cart.push(productDetails);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      // console.log(cart);
-    })
-  })
 }
 
 function renderUI(image, name, price, rating){
@@ -105,8 +94,6 @@ function fetchData(filter){
       let electronicElement = renderUI(item.image, item.title, item.price, item.rating.rate);
       electronicsSection.innerHTML += electronicElement;
     }
-    let addToCartButtons = document.querySelectorAll('.add-to-cart');
-    addToCart(addToCartButtons);
     })}).catch((error) => {
     console.log('error message', error);
   })
@@ -135,6 +122,25 @@ function search(event){
   })
 
 }
+
+function addToCart(e){
+  const parentItem = e.target.closest('.item');
+  let name = parentItem.querySelector('.name').textContent;
+  let price = parentItem.querySelector('.price').textContent;
+  let cartObj = {
+    nameOfItem: name,
+    priceOfItem: price
+  };
+  cart.push(cartObj);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function globalEventListener(type, selector, callback){
+  document.addEventListener(type, e => {
+    if(e.target.matches(selector)) callback(e);
+  })
+}
+
 
 fetchData("all");
 
@@ -172,20 +178,14 @@ electronicsFilter.addEventListener('click', () => {
   electronicsFilter.style.color = 'white';
 });
 
-
 logoutButton.addEventListener('click', (e) => {
   e.preventDefault();
   localStorage.removeItem('currentUser');
   window.location.href = '../';
 })
 
+globalEventListener("click", ".add-to-cart", addToCart);
 
 // Let's handle add to cart
-let cart = [];
-if(localStorage.getItem('cart')){
-  cart = JSON.parse(localStorage.getItem('cart'));
-}
-else{
-  cart = localStorage.setItem('cart', JSON.stringify(cart));
-}
+
 
